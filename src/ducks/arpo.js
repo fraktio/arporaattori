@@ -12,6 +12,11 @@ export function doArpo() {
   };
 };
 
+const elsis = {
+  row: 10,
+  seat: 23,
+};
+
 const seats = List()
   .concat(
     Range(1, 23).map(r => ({
@@ -94,16 +99,21 @@ const seats = List()
 
 const defaultState = Map({
   seats,
-  arpo: {
-    row: 10,
-    seat: 23,
-  },
+  arpo: undefined,
+  firstArpo: true,
 });
 
 export default function (state = defaultState, action) {
   switch (action.type) {
 
     case ARPO:
+
+      // Elsis will win the first time always as promised. <3
+      if (state.get('firstArpo')) {
+        return state
+          .set('arpo', elsis)
+          .set('firstArpo', false);
+      };
 
       const arpo = r.integer(0, seats.count() - 1);
       const arpoed = seats.get(arpo);
