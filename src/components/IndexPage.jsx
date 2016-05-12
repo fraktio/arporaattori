@@ -1,21 +1,56 @@
 import React from 'react';
-import TodoForm from './TodoForm';
-import TodoLists from './TodoLists';
-import { receiveTodos } from '../ducks/todo';
+import styles from './IndexPage.pcss';
+import cx from 'classNames';
 
 class IndexPage extends React.Component {
 
+  do() {
+    const { doArpo } = this.props;
+    doArpo();
+  }
+
   render() {
 
-    const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = this.props;
+    const { seats, arpo } = this.props;
 
     return (
-      <section>
-      <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
+      <section className={styles.root}>
 
-      <TodoForm onAdd={addTodo} />
+        <p>
+          <button onClick={this.do.bind(this)}>ARPO</button>
+        </p>
 
-      <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
+        <table>
+          <tbody>
+
+            {seats.groupBy(seat => seat.row).map((seats, rowNum) => {
+
+              return (
+                <tr key={rowNum}>
+                  <th className="index">
+                    {rowNum}
+                  </th>
+
+                  {seats.sortBy(s => s.seat).map(ss => {
+
+                    const isSelected = arpo && (arpo.row === ss.row && arpo.seat === ss.seat);
+
+                    const classes = cx({
+                      [styles.selected]: isSelected
+                    });
+
+                    return (
+                      <td key={ss.seat} className={classes}>{ss.seat}</td>
+                    );
+                  })}
+                </tr>
+              );
+
+            })}
+
+          </tbody>
+        </table>
+
       </section>
       );
   }

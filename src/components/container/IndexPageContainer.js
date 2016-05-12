@@ -2,23 +2,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Wrapped from '../IndexPage';
 import {
-  addTodo,
-  removeTodo,
-  receiveTodos,
-  saveTodos,
-  moveTodo,
-} from '../../ducks/todo';
+  doArpo,
+} from '../../ducks/arpo';
 
 export default connect(
   state => ({
-    todos: state.todo.get('todos'),
-    isChanged: state.todo.get('isChanged'),
+    arpo: state.todo.get('arpo'),
+    seats: state.todo.get('seats'),
   }),
   dispatch => bindActionCreators({
-    addTodo,
-    removeTodo,
-    saveTodos,
-    moveTodo,
-    receiveTodos,
+    doArpo
   }, dispatch)
 )(Wrapped);

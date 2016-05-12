@@ -8,12 +8,7 @@ export default class App extends React.Component {
 
     return (
       <div className={styles.root}>
-      <h1>
-      <img src={require('../images/trollo.png')} /> Trollo
-      </h1>
-
-      {this.props.children}
-
+        {this.props.children}
       </div>
       );
   }
