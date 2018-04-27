@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Arporizer.pcss";
 import cx from "classnames";
 
+console.log(styles, "stails");
+
 class Arporizer extends React.Component {
   render() {
     const {
@@ -43,38 +45,25 @@ class Arporizer extends React.Component {
           </div>
         )}
 
-        <table>
-          <tbody>
-            {venue.seats
-              .groupBy(seat => seat.row)
-              .sortBy((r, i) => i)
-              .map((seats, rowNum) => {
-                return (
-                  <tr key={rowNum}>
-                    <th className="index">{rowNum}</th>
+        <div className={styles.wrapper}>
+          {venue.seats.map(ss => {
+            const s = {
+              gridColumn: ``,
+              gridRow: `${ss.row}`
+            };
 
-                    {seats
-                      .sortBy(s => s.seat)
-                      .map(ss => {
-                        const classes = cx(styles.td, {
-                          [styles.selected]:
-                            arpos.includes(ss) || tempArpo === ss,
-                          [styles.lastSelected]: lastArpo === ss
-                        });
+            const classes = cx(styles.seat, {
+              [styles.selected]: arpos.includes(ss) || tempArpo === ss,
+              [styles.lastSelected]: lastArpo === ss
+            });
 
-                        return (
-                          <td key={ss.seat} className={classes}>
-                            {ss.seat}
-                          </td>
-                        );
-                      })
-                      .toList()}
-                  </tr>
-                );
-              })
-              .toList()}
-          </tbody>
-        </table>
+            return (
+              <div key={`${ss.row}-${ss.seat}`} className={classes} style={s}>
+                {ss.seat}
+              </div>
+            );
+          })}
+        </div>
       </section>
     );
   }
