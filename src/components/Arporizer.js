@@ -3,22 +3,45 @@ import styles from "./Arporizer.pcss";
 import cx from "classnames";
 
 class Arporizer extends React.Component {
-  arporize = () => {
-    const { doArpo } = this.props;
-    doArpo();
-  };
-
   render() {
-    const { venue, arpos, tempArpo, arpoing } = this.props;
+    const {
+      venue,
+      arpos,
+      tempArpo,
+      arpoing,
+      doArpo,
+      lockArpo,
+      reward
+    } = this.props;
     const lastArpo = arpos.last();
 
     return (
       <section className={styles.root}>
-        <p>
-          <button disabled={arpoing} onClick={this.arporize}>
-            ARPOROI
-          </button>
-        </p>
+        {reward && (
+          <div>
+            <h3>{reward.title}</h3>
+
+            <p>
+              <button
+                disabled={arpoing}
+                onClick={() => {
+                  doArpo();
+                }}
+              >
+                Arporoi
+              </button>
+
+              <button
+                disabled={arpoing}
+                onClick={() => {
+                  lockArpo();
+                }}
+              >
+                Palkitse!
+              </button>
+            </p>
+          </div>
+        )}
 
         <table>
           <tbody>

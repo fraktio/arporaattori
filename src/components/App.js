@@ -6,7 +6,16 @@ import Arporized from "./Arporized";
 
 export default class App extends React.Component {
   render() {
-    const { venue, doArpo, arpos, tempArpo, arpoing } = this.props;
+    const {
+      venue,
+      doArpo,
+      lockArpo,
+      arpos,
+      tempArpo,
+      arpoing,
+      reward,
+      rewarded
+    } = this.props;
     return (
       <div className={styles.root}>
         <Header />
@@ -17,9 +26,12 @@ export default class App extends React.Component {
           doArpo={doArpo}
           tempArpo={tempArpo}
           arpoing={arpoing}
+          lockArpo={lockArpo}
+          reward={reward}
+          rewarded={rewarded}
         />
 
-        <Arporized arpos={arpos} />
+        <Arporized rewarded={rewarded} />
       </div>
     );
   }

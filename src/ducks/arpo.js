@@ -1,5 +1,6 @@
-import { Map, OrderedSet } from "immutable";
+import { Map, OrderedSet, List } from "immutable";
 import venues from "../services/venue";
+import rewards from "../services/rewards";
 import r from "../utils/random";
 
 const startCount = () => r.integer(0, 333);
@@ -11,7 +12,7 @@ const arporator = (interval, dispatch, count = startCount()) => {
   console.log(interval, count, "i");
   if (interval >= 1000) {
     dispatch({
-      type: "ARPO_LOCK"
+      type: "ARPO_END"
     });
     return;
   }
@@ -29,6 +30,12 @@ const arporator = (interval, dispatch, count = startCount()) => {
 
     return arporator(increment, dispatch, count + 1);
   }, interval);
+};
+
+export const lockArpo = () => {
+  return {
+    type: "ARPO_LOCK"
+  };
 };
 
 export const doArpo = () => {
@@ -55,10 +62,12 @@ export const setVenue = i => {
 
 const defaultState = Map({
   venue: venues.getVenue(0),
+  reward: rewards.get(0),
   arpoIndex: undefined,
   lastArpo: undefined,
   tempArpo: undefined,
-  arpos: OrderedSet()
+  arpos: OrderedSet(),
+  rewarded: List()
 });
 
 export default function(state = defaultState, action) {
@@ -87,12 +96,23 @@ export default function(state = defaultState, action) {
       return state.set("tempArpo", seat);
     }
 
+    case "ARPO_END":
+      return state.set("arpoing", false);
+
     case "ARPO_LOCK": {
       const seat = state.get("tempArpo");
       return state
         .set("lastArpo", seat)
         .update("arpos", a => a.add(seat))
-        .set("arpoing", false);
+        .update("rewarded", r => {
+          return r.push({
+            reward: state.get("reward"),
+            seat: seat
+          });
+        })
+        .update("reward", r => {
+          return rewards.get(r.id + 1);
+        });
     }
     default:
       return state;
