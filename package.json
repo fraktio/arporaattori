@@ -1,43 +1,124 @@
 {
-  "name": "@dr-kobros/react-broilerplate-project",
-  "version": "1.1.0",
-  "description": "An example project utilizing broilerplate",
-  "main": "src/client.jsx",
+  "name": "arporaattori",
+  "version": "2.0.0",
+  "description": "Arporaattori",
+  "main": "src",
   "scripts": {
-    "clean": "rimraf ./dist",
-    "build:webpack": "NODE_ENV=prod webpack",
-    "build": "npm run clean && npm run build:webpack",
+    "build:client":
+      "cross-env NODE_ENV=production webpack --progress --display-optimization-bailout",
+    "build:server":
+      "cross-env NODE_ENV=production webpack --progress --config webpack.server.config.babel.js --display-optimization-bailout",
+    "build:node":
+      "cross-env NODE_ENV=production babel src/index.js > dist-server/index.js",
+    "build":
+      "yarn run build:client && yarn run build:server && yarn run build:node",
     "lint": "eslint src",
     "babel-node": "babel-node",
-    "start": "NODE_ENV=development nodemon --exec npm run babel-node -w src/server.js -- src/server.js",
-    "test": "ava -v"
+    "start":
+      "cross-env NODE_ENV=development webpack-dev-server --port 8888 --history-api-fallback --hot --inline",
+    "flow": "flow",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pekkis/react-broilerplate-project"
+    "url": "https://github.com/pekkis/react-training-broilerplate"
   },
   "keywords": [
-    "team"
+    "React",
+    "example",
+    "starter",
+    "boilerplate",
+    "broilerplate",
+    "training"
   ],
   "author": "Pekkis",
   "license": "BSD-3-Clause",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(pcss)$": "identity-obj-proxy"
+    }
+  },
   "dependencies": {
-    "@dr-kobros/react-broilerplate": "^0.8.0",
-    "@dr-kobros/react-broilerplate-server-express": "^0.3.0",
-    "axios": "^0.11.0",
-    "body-parser": "^1.15.1",
+    "axios": "^0.18.0",
     "classnames": "^2.2.5",
-    "eslint-plugin-import": "^1.8.0",
-    "eslint-plugin-jsx-a11y": "^1.2.0",
-    "immutable": "^3.8.1",
-    "node-uuid": "^1.4.7",
-    "normalize.css": "^4.1.1",
+    "faker": "^4.1.0",
+    "final-form": "^4.5.2",
+    "history": "^4.7.2",
+    "immutable": "^4.0.0-rc.9",
+    "luxon": "^1.0.0",
+    "polished": "^1.9.2",
+    "prop-types": "^15.6.1",
     "random-js": "^1.0.8",
-    "react-fa": "^4.1.1"
+    "rc-slider": "^8.6.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-fa": "^5.0.0",
+    "react-final-form": "^3.3.1",
+    "react-helmet": "^5.2.0",
+    "react-immutable-proptypes": "^2.1.0",
+    "react-loadable": "^5.3.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.0",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-promise-middleware": "^5.0.0",
+    "redux-thunk": "^2.1.0",
+    "styled-components": "^3.2.6",
+    "transit-immutable-js": "^0.7.0",
+    "transit-js": "^0.8.861",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^2.9.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-react": "^5.1.1"
+    "@dr-kobros/broilerplate": "^0.15.5",
+    "@dr-kobros/broilerplate-mini-css-extract": "^0.15.5",
+    "@dr-kobros/broilerplate-postcss": "^0.15.6",
+    "@dr-kobros/broilerplate-styled-components": "^0.15.6",
+    "ajv": "^6.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-import-inspector": "^2.0.0",
+    "babel-plugin-styled-components": "^1.5.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.1.4",
+    "dotenv": "^5.0.0",
+    "empty": "^0.10.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "flow-bin": "^0.70.0",
+    "flow-typed": "^2.4.0",
+    "identity-obj-proxy": "^3.0.0",
+    "import-inspector": "^2.0.0",
+    "jest": "^22.4.3",
+    "normalize.css": "^8.0.0",
+    "postcss-advanced-variables": "^2.3.3",
+    "postcss-import": "^11.1.0",
+    "postcss-modules": "^1.1.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-nesting": "^4.2.1",
+    "prettier": "^1.12.1",
+    "react-inspector": "^2.3.0",
+    "redux-devtools-extension": "^2.13.2",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "3.1.3"
   }
 }

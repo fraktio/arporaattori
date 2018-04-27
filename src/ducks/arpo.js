@@ -1,129 +1,100 @@
-import { List, Map, Range } from 'immutable';
-import todoService from '../services/todo-service.localhost';
+import { Map, OrderedSet } from "immutable";
+import venues from "../services/venue";
+import r from "../utils/random";
 
-export const ARPO = 'ARPO';
+const startCount = () => r.integer(0, 333);
 
-import Random from 'random-js';
-var r = new Random(Random.engines.mt19937().autoSeed());
+const exponential = 1.025;
+const slowdownStart = 1000;
 
-export function doArpo() {
-  return {
-    type: ARPO,
+const arporator = (interval, dispatch, count = startCount()) => {
+  console.log(interval, count, "i");
+  if (interval >= 1000) {
+    dispatch({
+      type: "ARPO_LOCK"
+    });
+    return;
+  }
+
+  setTimeout(() => {
+    dispatch({
+      type: "ARPO_INCREMENT"
+    });
+    dispatch({
+      type: "ARPO"
+    });
+
+    const increment =
+      count < slowdownStart ? interval : Math.pow(interval, exponential);
+
+    return arporator(increment, dispatch, count + 1);
+  }, interval);
+};
+
+export const doArpo = () => {
+  return dispatch => {
+    const interval = 5;
+
+    dispatch({
+      type: "ARPO_BEGIN"
+    });
+    dispatch({
+      type: "ARPO"
+    });
+
+    arporator(interval, dispatch);
   };
 };
 
-const elsis = {
-  row: 10,
-  seat: 23,
+export const setVenue = i => {
+  return {
+    type: "SET_VENUE",
+    payload: i
+  };
 };
 
-const seats = List()
-  .concat(
-    Range(1, 23).map(r => ({
-      row: 1,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 27).map(r => ({
-      row: 2,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 29).map(r => ({
-      row: 3,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 4,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 4,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 5,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 6,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 7,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 8,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 9,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 10,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 11,
-      seat: r,
-    }))
-  )
-  .concat(
-    Range(1, 31).map(r => ({
-      row: 12,
-      seat: r,
-    }))
-  );
-
 const defaultState = Map({
-  seats,
-  arpo: undefined,
-  firstArpo: true,
+  venue: venues.getVenue(0),
+  arpoIndex: undefined,
+  lastArpo: undefined,
+  tempArpo: undefined,
+  arpos: OrderedSet()
 });
 
-export default function (state = defaultState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
+    case "ARPO_BEGIN":
+      const i =
+        state.get("arpoIndex") ||
+        r.integer(0, state.get("venue").seats.count() - 1);
 
-    case ARPO:
+      return state.set("arpoIndex", i).set("arpoing", true);
 
-      // Elsis will win the first time always as promised. <3
-      if (state.get('firstArpo')) {
-        return state
-          .set('arpo', elsis)
-          .set('firstArpo', false);
-      };
+    case "ARPO_INCREMENT":
+      return state.update("arpoIndex", ai => {
+        const count = state.get("venue").seats.count();
+        ai = ai + 1;
 
-      const arpo = r.integer(0, seats.count() - 1);
-      const arpoed = seats.get(arpo);
+        if (ai > count - 1) {
+          return 0;
+        }
 
-      return state.set('arpo', {
-        ...arpoed,
+        return ai;
       });
 
+    case "ARPO": {
+      const seat = state.get("venue").seats.get(state.get("arpoIndex"));
+      return state.set("tempArpo", seat);
+    }
+
+    case "ARPO_LOCK": {
+      const seat = state.get("tempArpo");
+      return state
+        .set("lastArpo", seat)
+        .update("arpos", a => a.add(seat))
+        .set("arpoing", false);
+    }
     default:
       return state;
-
   }
 }
