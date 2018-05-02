@@ -1,4 +1,4 @@
-import { List, Range } from "immutable";
+import { List, Range, Map } from "immutable";
 
 const seatsPerRow = List([
   List([
@@ -25,52 +25,67 @@ const seatsPerRow = List([
   List([22, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30])
 ]);
 
-const SCAPE = true;
-const SCAPE_MAX_SEATS_PER_ROW = 42;
-const SCAPE_BLOCK_SIZE = 13;
-const seatsForRow = (row, seats) => {
+const weirdSeats = List.of(
+  Map({
+    "18;1": 10,
+    "18;2": 11,
+    "18;3": 12,
+    "18;4": 13,
+    "18;5": 27,
+    "18;6": 28,
+    "18;7": 29,
+    "18;8": 30,
+    "18;9": 31,
+    "18;10": 32,
+    "18;11": 33,
+    "19;1": 11,
+    "19;2": 12,
+    "19;3": 13,
+    "19;4": 27,
+    "19;5": 28,
+    "19;6": 29,
+    "19;7": 30,
+    "19;8": 31,
+    "19;9": 32
+  }),
+  Map({})
+);
+
+console.log(weirdSeats.toJS());
+
+const seatsForRow = (venueId, row, seats) => {
+  const maxSeats = maxSeatsPerRow(venueId);
+
   return Range(1, seats + 1).map(seatNumber => {
-    // Handle missing seats
-    let offset = 0;
-    let weirdRow = false;
-    if (SCAPE && row == 18) {
-      weirdRow = true;
-      if (seatNumber >= 6) {
-        offset = SCAPE_BLOCK_SIZE;
-      }
-    } else if (SCAPE && row == 19) {
-      weirdRow = true;
-      if (seatNumber >= 5) {
-        offset = SCAPE_BLOCK_SIZE;
-      }
-    } else {
-      offset = 0;
-    }
+    console.log(`${row};${seatNumber}`);
+    console.log(weirdSeats.getIn([venueId, `${row};${seatNumber}`]), "tus");
+
     return {
       row: row,
       seat: seatNumber,
-      position: weirdRow
-        ? Math.floor((SCAPE_MAX_SEATS_PER_ROW - seats - SCAPE_BLOCK_SIZE) / 2) +
-          seatNumber +
-          offset
-        : Math.floor((SCAPE_MAX_SEATS_PER_ROW - seats) / 2) + seatNumber
+      position: weirdSeats.getIn(
+        [venueId, `${row};${seatNumber}`],
+        Math.floor((maxSeats - seats) / 2) + seatNumber
+      )
     };
   });
 };
+
+const maxSeatsPerRow = venueId => seatsPerRow.get(venueId).max();
 
 const venues = [
   {
     name: "Scape",
     seats: seatsPerRow
       .get(0)
-      .map((seats, row) => seatsForRow(row + 1, seats))
+      .map((seats, row) => seatsForRow(0, row + 1, seats))
       .flatten()
   },
   {
     name: "Tennispalatsi 2",
     seats: seatsPerRow
       .get(1)
-      .map((seats, row) => seatsForRow(row + 1, seats))
+      .map((seats, row) => seatsForRow(1, row + 1, seats))
       .flatten()
   }
 ];
