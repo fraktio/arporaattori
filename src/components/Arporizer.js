@@ -48,7 +48,7 @@ class Arporizer extends React.Component {
         <div className={styles.wrapper}>
           {venue.seats.map(ss => {
             const s = {
-              gridColumn: ``,
+              gridColumn: `${ss.position}`,
               gridRow: `${ss.row}`
             };
 
