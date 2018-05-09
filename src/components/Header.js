@@ -3,7 +3,7 @@ import styles from "./Header.pcss";
 
 const Header = () => {
   return (
-    <div>
+    <div className={styles.root}>
       <h1>Arporaattori</h1>
     </div>
   );

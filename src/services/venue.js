@@ -51,15 +51,10 @@ const weirdSeats = List.of(
   Map({})
 );
 
-console.log(weirdSeats.toJS());
-
 const seatsForRow = (venueId, row, seats) => {
   const maxSeats = maxSeatsPerRow(venueId);
 
   return Range(1, seats + 1).map(seatNumber => {
-    console.log(`${row};${seatNumber}`);
-    console.log(weirdSeats.getIn([venueId, `${row};${seatNumber}`]), "tus");
-
     return {
       row: row,
       seat: seatNumber,

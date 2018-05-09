@@ -18,8 +18,6 @@ export default class App extends React.Component {
     } = this.props;
     return (
       <div className={styles.root}>
-        <Header />
-
         <Arporizer
           arpos={arpos}
           venue={venue}

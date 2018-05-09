@@ -9,7 +9,6 @@ const exponential = 1.025;
 const slowdownStart = 1000;
 
 const arporator = (interval, dispatch, count = startCount()) => {
-  console.log(interval, count, "i");
   if (interval >= 1000) {
     dispatch({
       type: "ARPO_END"
