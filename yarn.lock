@@ -10259,7 +10259,7 @@ webpack-log@^1.0.1, webpack-log@^1.1.2:
     loglevelnext "^1.0.1"
     uuid "^3.1.0"
 
-"webpack-manifest-plugin@github:andriijas/webpack-manifest-plugin":
+webpack-manifest-plugin@andriijas/webpack-manifest-plugin:
   version "2.0.0-rc.2"
   resolved "https://codeload.github.com/andriijas/webpack-manifest-plugin/tar.gz/19358472e76b5893f0b529bb6d53ef8ab9bab0ea"
   dependencies:

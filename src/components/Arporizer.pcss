@@ -1,27 +1,52 @@
 .root {
 }
 
+p,
+span,
+h1,
+h3 {
+  color: #ffffff;
+}
+
 .wrapper {
   display: grid;
-  grid-auto-columns: 1.85em;
+  grid-auto-columns: 2.5em;
+  grid-auto-rows: 2em;
   grid-gap: 2px;
   justify-content: center;
 }
 
-.seat {
-  border: 1px solid #8bd1c8;
-  background-color: #b3ddd2;
+.screenWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.screen {
+  width: 50%;
+  background-color: #ffffff;
   text-align: center;
+  padding: 0.25rem;
+  span {
+    color: #000000;
+  }
+}
+
+.seat {
+  background-color: #c13232;
+  text-align: center;
+  padding-top: 0.4rem;
+  color: #ffffff;
 }
 
 .selected {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
+  background-color: #e6c418;
+  color: #000000;
 }
 
 .lastSelected {
-  background-color: rgba(0, 0, 0, 1);
-  color: #ffffff;
+  background-color: #e6c418;
+  color: #000000;
 }
 
 .rewardo {
@@ -33,10 +58,13 @@
     margin: 0;
   }
 }
-
 .wrapperwrapperwrapper {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+table {
+  color: #ffffff;
 }

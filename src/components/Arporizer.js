@@ -48,6 +48,11 @@ class Arporizer extends React.Component {
 
         <div className={styles.wrapperwrapperwrapper}>
           <div className={styles.wrapperwrapper}>
+            <div className={styles.screenWrapper}>
+              <div className={styles.screen}>
+                <span>Screen</span>
+              </div>
+            </div>
             <div className={styles.wrapper}>
               {venue.seats.map(ss => {
                 const s = {
