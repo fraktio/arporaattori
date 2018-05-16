@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Arporizer.pcss";
 import cx from "classnames";
 import Button from "./Button";
+import { Range } from "immutable";
 
 class Arporizer extends React.Component {
   render() {
@@ -15,6 +16,10 @@ class Arporizer extends React.Component {
       reward
     } = this.props;
     const lastArpo = arpos.last();
+
+    const maxRow = venue.seats.maxBy(s => s.row).row;
+    const maxPos = venue.seats.maxBy(s => s.position).position + 2;
+    const rowRange = Range(1, maxRow + 1);
 
     return (
       <section className={styles.root}>
@@ -54,6 +59,20 @@ class Arporizer extends React.Component {
               </div>
             </div>
             <div className={styles.wrapper}>
+              {rowRange.map(row => {
+                const classes = cx(styles.seat, styles.rowIndicator);
+                const s = {
+                  gridColumn: `${maxPos}`,
+                  gridRow: `${row}`
+                };
+
+                return (
+                  <div key={`row-${row}`} className={classes} style={s}>
+                    {row}
+                  </div>
+                );
+              })}
+
               {venue.seats.map(ss => {
                 const s = {
                   gridColumn: `${ss.position}`,
