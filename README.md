@@ -1,42 +1,25 @@
-React broilerplate example project (Trollo)
-============================================
+# Arporaattori
 
-React broilerplate consists stuff that I use and vampirize to start new projects.
-Maintaining it seems to be a full-time job. Thanks, Obama!
+Arporizes awards in movie theater venues.
 
-This is an example starter project utilizing the stuff I now put in NPM.
+## Requirements
 
-Pull requests are accepted. If you vampirize this, vampirize something back
-please! :D
+* MacOS and Linux are grade A citizens. Should work in Windows too, but I don't
+  always test because I'm not a Windows man.
+* If it doesn't work, just use a Unix virtual machine.
+* The current version of Node.js (8.x). Might work on older ones, but no guarantees!
+* The [Yarn package manager](https://yarnpkg.com).
 
-Use as you wish, but still read the license from LICENSE.
+## Howto
 
-Requirements
--------------
+### develop
 
-- A relatively new Node.js. I'm running 5.x nowadays. Nobody really knows.
-- NPM version 3. My understanding of how to mark dependencies vs dependencies of dependencies is not complete.
+* check out the code
+* `yarn`
+* `cp .env.example .env`
+* `yarn run start`
+  * open browser and go to http://localhost:8888
 
-Stack
-------
+Builds to `dist/`. Then just put somewhere in the internets.
 
-- Webpack
-- Babel
-- React
-- Redux
-- React-Redux-Router
-- PostCSS
-- CSS modules
-- Testing, universality and some other stuff are still in progress.
-
-Instructions
--------------
-
-- install node.js
-- npm install -g nodemon
-- npm install
-- cp config.client.example.js config.client.js
-- cp config.server.example.js config.server.js
-- npm run start
-- open browser and go to http://localhost:8888
-- kood kood!
+* `yarn run build`
