@@ -11,7 +11,7 @@ const ControlPanel = props => {
         {reward.id + 1}) {reward.title}
       </h3>
 
-      <p>
+      <div>
         <Button
           disabled={arpoing}
           onClick={() => {
@@ -29,7 +29,7 @@ const ControlPanel = props => {
         >
           Palkitse!
         </Button>
-      </p>
+      </div>
     </div>
   );
 };

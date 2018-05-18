@@ -3,16 +3,20 @@ import { pure } from "recompose";
 import styles from "./Seat.pcss";
 import cx from "classnames";
 import posed from "react-pose";
+import { tween } from "popmotion";
 
 const config = {
-  selected: { scale: 1.25 },
-  unselected: { scale: 1.0 }
+  selected: {
+    scale: 1.25
+  },
+  unselected: {
+    scale: 1
+  }
 };
 
 const Div = posed.div(config);
 
 const Seat = props => {
-  console.log("renderati");
   const { seat, isBeingArpoed, previouslySelected, beenSelected } = props;
 
   const classes = cx(styles.seat, {

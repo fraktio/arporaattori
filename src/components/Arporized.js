@@ -5,8 +5,10 @@ const Arporized = props => {
   return (
     <table border="1">
       <thead>
-        <th>Palkinto</th>
-        <th>Paikka</th>
+        <tr>
+          <th>Palkinto</th>
+          <th>Paikka</th>
+        </tr>
       </thead>
       <tbody>
         {rewarded.map((r, i) => {
