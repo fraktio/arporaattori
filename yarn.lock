@@ -700,17 +700,17 @@
   integrity sha512-pH4KCsbtBLLe7eqUrw8brcuFO8IZlN36JjdKlOublibVdAIPHCzEnpBWOVUXK5sCf+DpBi8ZtuWtjF0srybdeA==
 
 "@dr-kobros/broilerplate-mini-css-extract@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-mini-css-extract/-/broilerplate-mini-css-extract-0.23.0.tgz#88602848756d87bc9082121beaf5e9c1b8259bcc"
-  integrity sha512-k4cDPThr3yWWtBobol4aG0NQixE45t7sljNW4Qow8MPQbVElMoOb1IDBrI8EjPQtdJgBx9mUa989/Ly7CoZmVQ==
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-mini-css-extract/-/broilerplate-mini-css-extract-0.23.1.tgz#0c62d50a831f2c4c370ad336b95a5474660457c3"
+  integrity sha512-hbl8DEBSdv2O2uCZMJU4/RBLEvziAjPXx174G39rLXdOE6KRPJPzoWSW6aED7FO/1Q8+YKjd93+oooXb/6sarw==
   dependencies:
     immutable "4.0.0-rc.12"
     mini-css-extract-plugin "^0.5.0"
 
 "@dr-kobros/broilerplate-postcss@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-postcss/-/broilerplate-postcss-0.23.0.tgz#14e7becf4258bf5b74769addee9f04e66429c002"
-  integrity sha512-16+vxMENfi8gL25LppfzuKDeHvEQqZMUn8Tq9turIwtj3NZ50SqORun3SSbIfSpxBR7YJYWr/AoYpYDOZJXeDA==
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-postcss/-/broilerplate-postcss-0.23.1.tgz#4d5c96b0e80aefe6f88ba924598a4c0bc285585d"
+  integrity sha512-tKdR9tPsvN9jtrhJvRWftT4udyU/xOC01rjafcvcB/4SoQ0oOG9N/0m5xh4Fm3/Trkz6lqoVfX6mcr4b6Ea+9Q==
   dependencies:
     autoprefixer "^9.4.7"
     immutable "4.0.0-rc.12"
@@ -718,16 +718,16 @@
     postcss-preset-env "^6.1.2"
 
 "@dr-kobros/broilerplate-styled-components@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-styled-components/-/broilerplate-styled-components-0.23.0.tgz#c0bc8f4d288ee2a05753f3ec0cd14ec27d958949"
-  integrity sha512-XtWAJ+JvMrOt28UmVfDhQ5JOMrf+jPVJ2oxFeiAI5/KKpYLIRsZ2gPksx9NstV4BAjStED48d2dd74Gm3Jfvjw==
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate-styled-components/-/broilerplate-styled-components-0.23.1.tgz#a831a1d930a92d799bdc7fa1ac1ec98e0c3a6999"
+  integrity sha512-701RB4p6PAstWuQssTThsDXneQPra2nGV5bt66jd/vDiyFSd2Q6CkUB4yhfvmwYqNUWJD9xsL5B0L2Yyjl3uhw==
   dependencies:
     immutable "4.0.0-rc.12"
 
 "@dr-kobros/broilerplate@^0.23.0":
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate/-/broilerplate-0.23.0.tgz#d65de49b8847bdbb82cfc662b8f4728ea4fa366b"
-  integrity sha512-2O9MGUBmprpn/HAtvzUtCAiFo86c0VCHsbUDS0F5aZxQg27PMUIUPRDuzTub2UaTVVHPXHOlCmJOkbqRY4AlVQ==
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@dr-kobros/broilerplate/-/broilerplate-0.23.1.tgz#3479ca79fa577cc7f65ed567a78eba0d8836a473"
+  integrity sha512-9ji6BjvtcPZRe1br6GCyDQ+UkPrxsWY9/yU3T9fiSEJD1CyVU1h6KXcSor7KSBlogY+DDtzGwKYtkw0KI5CWlg==
   dependencies:
     case-sensitive-paths-webpack-plugin "^2.2.0"
     clean-webpack-plugin "^1.0.1"
