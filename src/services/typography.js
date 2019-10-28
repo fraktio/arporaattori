@@ -2,7 +2,7 @@ import Typography from "typography";
 
 const typography = new Typography({
   includeNormalize: true,
-  baseFontSize: "10px",
+  baseFontSize: "14px",
   baseLineHeight: 1.45,
   headerFontFamily: ["Nunito", "sans-serif"],
   bodyFontFamily: ["Nunito", "sans-serif"],
