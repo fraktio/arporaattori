@@ -2,9 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Root from "./Root";
 
-import { createStore } from "./utils/redux";
-import { getMiddlewares, getReducers, getEnhancers } from "./config/redux";
+import { createStore } from "./services/redux";
+import {
+  getMiddlewares,
+  getReducers,
+  getEnhancers,
+  getSagaMiddleware
+} from "./config/redux";
 import { getInitialState } from "./config/state";
+
+import rootSaga from "./sagas/root";
 
 const initialState = getInitialState();
 const store = createStore(
@@ -13,6 +20,10 @@ const store = createStore(
   getEnhancers(),
   initialState
 );
+
+const sagaMiddleware = getSagaMiddleware();
+
+sagaMiddleware.run(rootSaga);
 
 function render(Component, rootElement, method = "render") {
   ReactDOM[method](<Component store={store} />, rootElement);

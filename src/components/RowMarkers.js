@@ -11,7 +11,7 @@ const RowMarkers = props => {
       {rowRange.map(row => {
         const s = {
           gridColumn: `${col}`,
-          gridRow: `${row}`
+          gridRow: `${row + 3}`
         };
 
         return (

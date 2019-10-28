@@ -1,7 +1,3 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
-export default styled.button`
-  border-radius: 5px;
-  margin-right: 1em;
-  cursor: pointer;
-`;
+export default styled.button({});

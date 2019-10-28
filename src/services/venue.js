@@ -68,13 +68,14 @@ const seatsForRow = (venueId, row, seats) => {
 
 const maxSeatsPerRow = venueId => seatsPerRow.get(venueId).max();
 
-const venues = [
+const venues = List.of(
   {
-    name: "Scape",
+    name: "Tennispalatsi iSense",
     seats: seatsPerRow
       .get(0)
       .map((seats, row) => seatsForRow(0, row + 1, seats))
       .flatten()
+      .map((s, i) => ({ ...s, index: i }))
   },
   {
     name: "Tennispalatsi 2",
@@ -82,11 +83,10 @@ const venues = [
       .get(1)
       .map((seats, row) => seatsForRow(1, row + 1, seats))
       .flatten()
+      .map((s, i) => ({ ...s, index: i }))
   }
-];
-
-const getVenue = i => venues[i];
+);
 
 export default {
-  getVenue
+  all: () => venues
 };

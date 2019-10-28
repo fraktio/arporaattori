@@ -2,6 +2,7 @@ import React from "react";
 
 const Arporized = props => {
   const { rewarded } = props;
+
   return (
     <table border="1">
       <thead>
@@ -13,8 +14,8 @@ const Arporized = props => {
       <tbody>
         {rewarded.map((r, i) => {
           return (
-            <tr>
-              <td>{r.reward.title}</td>
+            <tr key={i}>
+              <td>{r.reward}</td>
               <td>
                 rivi {r.seat.row}, paikka {r.seat.seat}
               </td>

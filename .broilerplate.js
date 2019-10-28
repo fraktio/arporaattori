@@ -3,7 +3,6 @@ const util = require("util");
 const {
   pipe,
   empty,
-  ensureFiles,
   defaultFeatures,
   defaultPaths,
   defaultBaseConfig,
@@ -16,11 +15,10 @@ const {
 } = require("@dr-kobros/broilerplate");
 
 const postCssFeature = require("@dr-kobros/broilerplate-postcss");
-const babelPolyfillFeature = require("@dr-kobros/broilerplate/lib/features/babelPolyfillFeature");
 const nodeExternalsFeature = require("@dr-kobros/broilerplate/lib/features/nodeExternalsFeature");
 const externalCssFeature = require("@dr-kobros/broilerplate/lib/features/externalCssFeature");
 const extractCssFeature = require("@dr-kobros/broilerplate-mini-css-extract");
-const styledComponentsFeature = require("@dr-kobros/broilerplate-styled-components");
+const emotionFeature = require("./src/config/emotion");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -42,8 +40,7 @@ module.exports = target => {
     defaultFeatures,
     addFeatures(
       postCssFeature(),
-      styledComponentsFeature(),
-      // babelPolyfillFeature(),
+      emotionFeature(),
       externalCssFeature(),
       extractCssFeature(),
       nodeExternalsFeature({
@@ -56,7 +53,6 @@ module.exports = target => {
       }
       return build.setIn(["base", "devtool"], "cheap-module-eval-source-map");
     },
-    ensureFiles(false),
     compile(env, target),
     override(path.join(__dirname, "./src/config/overrides")),
     run,

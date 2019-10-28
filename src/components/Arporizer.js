@@ -8,14 +8,18 @@ class Arporizer extends React.Component {
   render() {
     const {
       venue,
-      arpos,
-      tempArpo,
-      arpoing,
-      doArpo,
-      lockArpo,
-      reward
+      chosenSeats,
+      randomizing,
+      randomize,
+      awardReward,
+      rewards,
+      currentReward,
+      randomizeIndex
     } = this.props;
-    const lastArpo = arpos.last();
+
+    const reward = rewards.get(currentReward);
+
+    const lastArpo = chosenSeats.last();
 
     const maxRow = venue.seats.maxBy(s => s.row).row;
     const maxPos = venue.seats.maxBy(s => s.position).position + 2;
@@ -24,34 +28,42 @@ class Arporizer extends React.Component {
       <section className={styles.root}>
         {reward && (
           <ControlPanel
-            arpoing={arpoing}
+            randomizing={randomizing}
             reward={reward}
-            doArpo={doArpo}
-            lockArpo={lockArpo}
+            randomize={randomize}
+            awardReward={awardReward}
           />
         )}
 
         <div className={styles.wrapperwrapperwrapper}>
           <div className={styles.wrapperwrapper}>
-            <div className={styles.screenWrapper}>
-              <div className={styles.screen}>
+            <div className={styles.wrapper}>
+              <div
+                css={{
+                  gridColumn: `1 / ${maxPos - 1}`,
+                  gridRow: "1",
+                  backgroundColor: "#ffffff",
+                  textAlign: "center",
+                  padding: "0.25rem",
+                  color: "#000000"
+                }}
+              >
                 <span>Screen</span>
               </div>
-            </div>
-            <div className={styles.wrapper}>
+
               <RowMarkers rows={maxRow} col={maxPos} />
 
-              {venue.seats.map(ss => {
-                const beenSelected = arpos.includes(ss);
-                const isBeingArpoed = tempArpo === ss;
-                const previouslySelected = lastArpo === ss;
+              {venue.seats.map((ss, i) => {
+                const beenSelected = chosenSeats.includes(i);
+                const isBeingRandomized = randomizeIndex === i;
+                const previouslySelected = lastArpo === i;
 
                 return (
                   <Seat
                     key={`${ss.row};${ss.seat}`}
                     seat={ss}
                     beenSelected={beenSelected}
-                    isBeingArpoed={isBeingArpoed}
+                    isBeingRandomized={isBeingRandomized}
                     previouslySelected={previouslySelected}
                   />
                 );

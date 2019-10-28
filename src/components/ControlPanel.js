@@ -4,27 +4,25 @@ import Button from "./Button";
 import { pure } from "recompose";
 
 const ControlPanel = props => {
-  const { reward, lockArpo, doArpo, arpoing } = props;
+  const { reward, awardReward, randomize, randomizing } = props;
   return (
     <div className={styles.root}>
-      <h3 className={styles.title}>
-        {reward.id + 1}) {reward.title}
-      </h3>
+      <h3 className={styles.title}>{reward}</h3>
 
       <div>
         <Button
-          disabled={arpoing}
+          disabled={randomizing}
           onClick={() => {
-            doArpo();
+            randomize();
           }}
         >
           Arporoi
         </Button>
 
         <Button
-          disabled={arpoing}
+          disabled={randomizing}
           onClick={() => {
-            lockArpo();
+            awardReward();
           }}
         >
           Palkitse!

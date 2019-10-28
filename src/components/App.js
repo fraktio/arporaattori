@@ -1,36 +1,18 @@
 import React from "react";
-import styles from "./App.pcss";
-import Header from "./Header";
-import Arporizer from "./Arporizer";
-import Arporized from "./Arporized";
 
-export default class App extends React.Component {
-  render() {
-    const {
-      venue,
-      doArpo,
-      lockArpo,
-      arpos,
-      tempArpo,
-      arpoing,
-      reward,
-      rewarded
-    } = this.props;
-    return (
-      <div className={styles.root}>
-        <Arporizer
-          arpos={arpos}
-          venue={venue}
-          doArpo={doArpo}
-          tempArpo={tempArpo}
-          arpoing={arpoing}
-          lockArpo={lockArpo}
-          reward={reward}
-          rewarded={rewarded}
-        />
+import IndexPage from "./IndexPage";
+import VenuePage from "./VenuePage";
+import { Switch, Route } from "react-router";
 
-        <Arporized rewarded={rewarded} />
-      </div>
-    );
-  }
-}
+const App = props => {
+  return (
+    <div>
+      <Switch>
+        <Route path="/" exact component={IndexPage} />
+        <Route path="/venue/:id" exact component={VenuePage} />
+      </Switch>
+    </div>
+  );
+};
+
+export default App;
