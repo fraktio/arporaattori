@@ -44,7 +44,7 @@
     "framer-motion": "^1.6.15",
     "history": "^4.10.1",
     "immutable": "^4.0.0-rc.9",
-    "luxon": "^1.19.3",
+    "luxon": "^2.5.2",
     "polished": "^3.4.1",
     "prop-types": "^15.6.1",
     "random-js": "^2.1.0",
